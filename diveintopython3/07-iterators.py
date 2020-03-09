@@ -4,3 +4,21 @@
 # acts like one (it’s the first piece of code executed in a newly created instance of the class), and even sounds like one.
 # Incorrect, because the object has already been constructed by the time the __init__() method is called,
 # and you already have a valid reference to the new instance of the class.
+
+class Fib:
+    '''iterator that yields numbers in the Fibonacci sequence'''
+
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):
+        self.a = 0
+        self.b = 1
+        return self
+
+    def __next__(self):
+        fib = self.a
+        if fib > self.max:
+            raise StopIteration
+        self.a, self.b = self.b, self.a + self.b
+        return fib
