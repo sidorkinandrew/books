@@ -59,3 +59,11 @@ class LazyRules:
         return funcs
 
 rules = LazyRules()
+
+
+# We have achieved pluralization nirvana.
+# Minimal startup cost. The only thing that happens on import is instantiating a single class and opening a file (but not reading from it).
+# Maximum performance. The previous example would read through the file and build functions dynamically every time you wanted to pluralize a word. This version will cache functions as soon as they’re built, and in the worst case, it will only read through the pattern file once, no matter how many words you pluralize.
+#Separation of code and data. All the patterns are stored in a separate file. Code is code, and data is data, and never the twain shall meet.
+# ☞Is this really nirvana? Well, yes and no. Here’s something to consider with the LazyRules example: the pattern file is opened (during __init__()), and it remains open until the final rule is reached. Python will eventually close the file when it exits, or after the last instantiation of the LazyRules class is destroyed, but still, that could be a long time. If this class is part of a long-running Python process, the Python interpreter may never exit, and the LazyRules object may never get destroyed.
+# There are ways around this. Instead of opening the file during __init__() and leaving it open while you read rules one line at a time, you could open the file, read all the rules, and immediately close the file. Or you could open the file, read one rule, save the file position with the tell() method, close the file, and later re-open it and use the seek() method to continue reading where you left off. Or you could not worry about it and just leave the file open, like this example code does. Programming is design, and design is all about trade-offs and constraints. Leaving a file open too long might be a problem; making your code more complicated might be a problem. Which one is the bigger problem depends on your development team, your application, and your runtime environment.
