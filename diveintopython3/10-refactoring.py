@@ -1,0 +1,1 @@
+# Refactoring is the process of taking working code and making it work better. Usually, “better” means “faster”, although it can also mean “using less memory”, or “using less disk space”, or simply “more elegantly”. Whatever it means to you, to your project, in your environment, refactoring is important to the long-term health of any program.
