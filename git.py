@@ -1,4 +1,5 @@
 # https://guides.github.com/introduction/git-handbook/
+# https://guides.github.com/activities/hello-world/
 
 # =========================================================================
 # GitHub and the command line
