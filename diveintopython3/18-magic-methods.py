@@ -79,10 +79,38 @@ all attribute and method lookups go through the __getattribute__() method
 - PEP 357	number as a list index	a_list[x]	a_list[x.__index__()]
 
 # ============================== Classes That Can Be Compared#
-equality	x == y	x.__eq__(y)
-inequality	x != y	x.__ne__(y)
-less than	x < y	x.__lt__(y)
-less than or equal to	x <= y	x.__le__(y)
-greater than	x > y	x.__gt__(y)
-greater than or equal to	x >= y	x.__ge__(y)
-truth value in a boolean context	if x:	x.__bool__()
+- equality	x == y	x.__eq__(y)
+- inequality	x != y	x.__ne__(y)
+- less than	x < y	x.__lt__(y)
+- less than or equal to	x <= y	x.__le__(y)
+- greater than	x > y	x.__gt__(y)
+- greater than or equal to	x >= y	x.__ge__(y)
+- truth value in a boolean context	if x:	x.__bool__()
+# If you define a __lt__() method but no __gt__() method, Python will use the __lt__() method with operands swapped. However, Python will not combine methods. For example, if you define a __lt__() method and a __eq__() method and try to test whether x <= y, Python will not call __lt__() and __eq__() in sequence. It will only call the __le__() method.
+
+# ==============================   Classes That Can Be Serialized#
+- a custom object copy	copy.copy(x)	x.__copy__()
+- a custom object deepcopy	copy.deepcopy(x)	x.__deepcopy__()
+*	to get an object’s state before pickling	pickle.dump(x, file)	x.__getstate__()
+*	to serialize an object	pickle.dump(x, file)	x.__reduce__()
+*	to serialize an object (new pickling protocol)	pickle.dump(x, file, protocol_version)	x.__reduce_ex__(protocol_version)
+*	control over how an object is created during unpickling	x = pickle.load(file)	x.__getnewargs__()
+*	to restore an object’s state after unpickling	x = pickle.load(file)	x.__setstate__()
+# * To recreate a serialized object, Python needs to create a new object that looks like the serialized object, then set the values of all the attributes on the new object. The __getnewargs__() method controls how the object is created, then the __setstate__() method controls how the attribute values are restored.
+
+# ==============================   Classes That Can Be Used in a with Block#
+- do something special when entering a with block	with x:	x.__enter__()
+- do something special when leaving a with block	with x:	x.__exit__(exc_type, exc_value, traceback)
+
+# ==============================   Really Esoteric Stuff#
+-  a class constructor	x = MyClass()	x.__new__()
+*	a class destructor	del x	x.__del__()
+only a specific set of attributes to be defined		x.__slots__()
+a custom hash value	hash(x)	x.__hash__()
+to get a property’s value	x.color	type(x).__dict__['color'].__get__(x, type(x))
+to set a property’s value	x.color = 'PapayaWhip'	type(x).__dict__['color'].__set__(x, 'PapayaWhip')
+to delete a property	del x.color	type(x).__dict__['color'].__del__(x)
+to control whether an object is an instance of your class	isinstance(x, MyClass)	MyClass.__instancecheck__(x)
+to control whether a class is a subclass of your class	issubclass(C, MyClass)	MyClass.__subclasscheck__(C)
+to control whether a class is a subclass of your abstract base class	issubclass(C, MyABC)	MyABC.__subclasshook__(C)
+* Exactly when Python calls the __del__() special method is incredibly complicated. To fully understand it, you need to know how Python keeps track of objects in memory. Here’s a good article on Python garbage collection and class destructors. You should also read about weak references, the weakref module, and probably the gc module for good measure.
