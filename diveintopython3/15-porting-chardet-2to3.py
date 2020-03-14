@@ -23,3 +23,7 @@ ord() expected string of length 1, but int found
 Unorderable types: int() >= str()
 Global name 'reduce' is not defined
 Summary
+
+
+
+# Each item in a string is a string. Each item in a byte array is an integer.
