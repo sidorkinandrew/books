@@ -60,3 +60,45 @@ def selftest ():
     show_instance_tree(F())
 
 if __name__ == '__main__': selftest()
+
+# python -3 -m time it -n 1000 -r 5 -s "L = list(range (100))" "x = L.__len__()"
+
+class Indexer:
+    def __getitem__ (self, index) :
+        if isinstance(index, int) : # Проверка режима использования
+            print (' indexing ', index)
+        else:
+            print (' slicing' , index.start, index.stop, index.step)
+
+# Но метод __ index __ в Python З.Х не имеет отношения к индексированию!!!!
+
+class Stepper Index:
+    def getitem (self, i) :
+        return self.data[i]
+# in, [], () = X, list, tuple, join
+
+# __iter__ + yield / skips an element
+class SkipObject: 
+    def __init__ (self, wrapped) : # local
+        self.wrapped = wrapped # local state
+    def __iter__ (self) :
+        offset = 0
+        while offset < len(self.wrapped):
+            item = self.wrapped[offset]
+            offset += 2
+            yield item
+
+# __contains__ > __iter__ > __next__ > __getitem__
+
+# self.attribute = value => self.__setattr__('attribute' , vaule)
+
+# __getattr__  is called for non-extent attributes (those who were not found via class_tree_search)
+
+# __str__ => str, print => user-friendly
+
+# __repr__ => all contexts => dev-friendly
+
+# __call__ 
+
+# __bool__ >= __len__
+
