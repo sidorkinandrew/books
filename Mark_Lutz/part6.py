@@ -2,13 +2,15 @@
 >>> x. __ diet __ [ ’ age 1 ] # Индексирование словаря не производит поиск в иерархии наследования
 >>> х. __ class __ # Связь экземпляра с классом
 >>> гес. __ bases __ # Связь с суперклассами
-# Fetching all methds/properties - use __class__ and then ___dict__, then __dict__ against all __bases__ 
+
+# Fetching all methods/properties - use __class__ and then ___dict__, then __dict__ against all __bases__ 
 # OR use dir(obj)
 >>> len(dir(bob) )
 32
 >>> list (name for name in dir (bob) if not name, start s with (' __ '))
 ['gatherAttrs', 'giveRaise', 'job', 'lastName', 'name', 'pay']
-# __some_method - pseudo-closed attributes of a class
+
+# __some_method - pseudo-closed attributes of a class if dundered in front
 class AttrDisplay:
     def gatherAttrs(self):
         attrs = []
@@ -17,3 +19,9 @@ class AttrDisplay:
         return ', '.join(attrs)
     def __repr__ (self) :
         return '[{}: {}]'.format(self.__class__.__name__, self.gatherAttrs())
+
+# using shelves
+import shelve
+with shelve.open('persondb') as db:
+    for obj in (bob):
+        db[obj.name] = obj
