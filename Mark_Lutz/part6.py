@@ -17,7 +17,7 @@ class AttrDisplay:
         for key in sorted (self.__dict__):
             attrs.append('{} = {}'.format(key, getattr(self,key)))
         return ', '.join(attrs)
-    def __repr__ (self) :
+    def __repr__ (self):
         return '[{}: {}]'.format(self.__class__.__name__, self.gatherAttrs())
 
 # using shelves
@@ -25,3 +25,38 @@ import shelve
 with shelve.open('persondb') as db:
     for obj in (bob):
         db[obj.name] = obj
+
+# __rep___ useful to  any class
+    def __repr__ (self):
+        attrs = []
+        for key in sorted (self.__dict__):
+            attrs.append('{} = {}'.format(key, getattr(self,key)))
+        return '[{}: {}]'.format(self.__class__.__name__, ', '.join(attrs))
+
+# instance.method(*args) == class.method(instance, *args)
+
+# LEGB name resolution search not CLEGB!
+
+def class_tree(classname, indent):
+"""
+recursive super class name search
+"""
+    print("."*indent, classname.__name__)
+    for superclass in classname.__bases__:
+        class_tree(superclass, indent+3)
+
+def show_instance_tree(class_instance):
+    print("Building tree for {}".format(class_instance))
+    class_tree(class_instance.__class__, 3)
+
+def selftest ():
+    class A: pass
+    class В(A): pass
+    class C(A): pass
+    class D(В, C) : pass
+    class E: pass
+    class F(D,E) : pass
+    show_instance_tree(B())
+    show_instance_tree(F())
+
+if __name__ == '__main__': selftest()
