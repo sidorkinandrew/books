@@ -8,3 +8,4 @@
 32
 >>> list (name for name in dir (bob) if not name, start s with (' __ '))
 ['gatherAttrs', 'giveRaise', 'job', 'lastName', 'name', 'pay']
+# __some_method - pseudo-closed attributes of a class
