@@ -13,7 +13,7 @@
 def gatherAttrs(self):
     attrs = []
     for key in sorted (self.__dict__):
-        attrs.append ('{}={}'.format(key, getattr(self,key))
+        attrs.append('{}={}'.format(key, getattr(self,key)))
     return ', '.join(attrs)
 
 def __repr__ (self) :
