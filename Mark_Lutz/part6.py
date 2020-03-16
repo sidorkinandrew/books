@@ -127,3 +127,6 @@ print(object3.name, object3.job)
 
 # Listinherited p. 199
 
+# p. 202
+# 
+# p. 210
