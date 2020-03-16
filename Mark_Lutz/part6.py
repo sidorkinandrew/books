@@ -102,3 +102,4 @@ class SkipObject:
 
 # __bool__ >= __len__
 
+# def/lambda | __call__ | bound_function | classmethod | staticmethod
