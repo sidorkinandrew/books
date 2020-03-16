@@ -125,3 +125,5 @@ objectl.doit(99)
 print(object2.name, object2.job)
 print(object3.name, object3.job)
 
+# Listinherited p. 199
+
