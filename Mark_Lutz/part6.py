@@ -132,3 +132,9 @@ print(object3.name, object3.job)
 # p. 210
 
 # p. 227
+
+# p. 239 __mro__ = DFLR - duplicates
+
+# p. 242 sample
+
+# p. 256 slots timeit sample
