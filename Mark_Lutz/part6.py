@@ -138,3 +138,6 @@ print(object3.name, object3.job)
 # p. 242 sample
 
 # p. 256 slots timeit sample
+
+# p. 262  staticmethod/classmethod
+
