@@ -141,3 +141,5 @@ print(object3.name, object3.job)
 
 # p. 262  staticmethod/classmethod
 
+# p. 269 classmethod always receives the lowest class in inheritance tree
+# staticmethod is better for local class attributes while classmethod is better for different classes/attributes
