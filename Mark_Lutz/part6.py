@@ -143,3 +143,19 @@ print(object3.name, object3.job)
 
 # p. 269 classmethod always receives the lowest class in inheritance tree
 # staticmethod is better for local class attributes while classmethod is better for different classes/attributes
+
+class tracer:
+    def __init__(self, func): 
+        self.calls = О
+        self.func = func
+    def __call__ (self, *args):
+        self.calls += 1
+        print('call %s to %s' % (self.calls, self.func.__name__))
+        return self.func(*args)
+
+@tracer # same as spam = tracer (spam)
+def spam (a, b, с): # "decorates" spam
+    return a + b + с
+
+print (spam (1, 2, 3)) # calls tracer actually
+print (spam (' а ', ' b', 'с')) # executes __call__
