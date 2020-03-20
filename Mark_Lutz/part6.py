@@ -159,3 +159,6 @@ def spam (a, b, с): # "decorates" spam
 
 print (spam (1, 2, 3)) # calls tracer actually
 print (spam (' а ', ' b', 'с')) # executes __call__
+
+# super() depends on MRO
+
