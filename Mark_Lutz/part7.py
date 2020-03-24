@@ -74,4 +74,24 @@ if __ name __ == ' __ main __ ' :
         raise TypeError
         print('not reached') 
 
+# OOP Exce[tions
+class General(Exception) : pass
+class Specificl(General) : pass
+class Specific2(General) : pass
 
+def raiserO () :
+    X = General ()  # superclass
+    raise X
+def raiserl ():
+    X = Specificl ()  # instance/subclass
+    raise X
+def raiser2 ():
+    X = Specific2()  # instance/subclass
+    raise X
+
+for func in (raiserO, raiserl, raiser2):
+    try:
+        func ()
+    except General: # match superclass
+        import sys
+        print (' caught : %s ’ % sys . exc_info ()[0])
