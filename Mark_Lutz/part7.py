@@ -74,7 +74,7 @@ if __ name __ == ' __ main __ ' :
         raise TypeError
         print('not reached') 
 
-# OOP Exce[tions
+# OOP Exceptions
 class General(Exception) : pass
 class Specificl(General) : pass
 class Specific2(General) : pass
