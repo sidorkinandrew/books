@@ -95,3 +95,61 @@ for func in (raiserO, raiserl, raiser2):
     except General: # match superclass
         import sys
         print (' caught : %s ’ % sys . exc_info ()[0])
+
+# __str__/__repr__ of Exceptions
+class Е (Exception) :
+    def __ repr __ (self) : return 'Not called! ' # is not called !!!!
+
+>>> raise E('spam')
+main __ . E: spam
+
+class E (Exception) :
+    def __ str __ (self) : return 'Called? ' # called
+
+>>> raise E('spam')
+__ main __ .E: Called!
+
+# nested try/except - program flow returns to the previous except level (one level)
+# nested try/finally - program flow goes through every level on finally (or until matching except)
+
+# higher exceptions hooks - https://docs.python.org/3/library/atexit.html
+
+# OR sys.excepthooк
+
+import sys
+log = open ('testlog', 'a')
+from testapi import moreTests, runNextTest, testName
+def testdriver():
+    while moreTests():
+        try:
+            runNextTest()
+        except:
+            print ('FAILED' , testName(), sys.exc_info()[:2], file=log)
+        else:
+            print ('PASSED' , testName(), file=log)
+testdriver()
+
+#
+import traceback
+def inverse(x):
+    return 1 / x
+try:
+    inverse (0)
+except Exception:
+    traceback.print_exc(file=open('badly.exc', 'w'))
+print('Bye')
+
+# PyDoc/PyLint/PyChecker
+# PyUnit(unittest)/doctest
+
+# python -m profile main.py
+
+import sys, locale
+>>> sys.platform
+>>> locale.getpreferredencoding(False), sys.getdefaultencoding()
+
+>>> set (dir('abc')) - set(dir(b'abc'))
+{'isprintable', 'format', 'isdecimal', 'encode', 'format_map' , 'casefold', ' isidentifier ', 'isnumeric'}
+>>> set(dir(b'abc')) - set(dir('abc'))
+{'fromhex', 'decode', 'hex'}
+
