@@ -153,3 +153,21 @@ import sys, locale
 >>> set(dir(b'abc')) - set(dir('abc'))
 {'fromhex', 'decode', 'hex'}
 
+# PROPERTIES
+
+attribute = property(fget, fset, fdel, doc)
+
+class Person:
+    def __init__ (self, name):
+        self._name = name
+    def getName(self):
+        print ('fetch ...')
+        return self, name
+    def setName(self, value):
+        print ('change ...')
+        self._name = value
+    def delName(self):
+        print ('remove ...')
+        del self._name
+    name = property(getName, setName, delName, "name property docs")
+
