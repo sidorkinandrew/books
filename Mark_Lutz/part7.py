@@ -171,3 +171,16 @@ class Person:
         del self._name
     name = property(getName, setName, delName, "name property docs")
 
+class Descriptor:
+    def __get__ (self, instance, owner):
+        print (self, instance, owner, sep='\n')
+class Subject:
+    attr = Descriptor()
+
+>>>X = Subject ()
+>>>X.attr
+<__main__.Descriptor object at 0x03AD1990>
+<__main__.Subject object at 0x03AD1970>
+<class '__main__.Subject'>
+
+# X.attr -> Descriptor.__get__(Subject.attr, X, Subject)
