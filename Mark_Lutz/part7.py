@@ -255,3 +255,9 @@ print(obj.X, obj.Y, obj.Z)
 
 obj2 = CalcAttrs()                         # But X uses shared data, like Y!
 print(obj2.X, obj2.Y, obj2.Z)
+
+
+def __getattr__ (self, name) : # unknown attributes [obj. паше]
+def __getattribute__ (self, name) : # all attributes [obj .name]
+def __setattr__ (self, name, value) : # all attributes [obj .name=value]
+def __delattr__ (self, name) : # all attributes [del obj.name]
