@@ -184,3 +184,11 @@ class Subject:
 <class '__main__.Subject'>
 
 # X.attr -> Descriptor.__get__(Subject.attr, X, Subject)
+
+class D:
+    def __get__ (*args) : print ('get')
+    def __set__ (*args) : raise AttributeError ('cannot set')
+
+# __delete__ (__delattr__) <> __del__  !!!
+
+
