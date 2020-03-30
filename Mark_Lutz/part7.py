@@ -261,3 +261,15 @@ def __getattr__ (self, name) : # unknown attributes [obj. паше]
 def __getattribute__ (self, name) : # all attributes [obj .name]
 def __setattr__ (self, name, value) : # all attributes [obj .name=value]
 def __delattr__ (self, name) : # all attributes [del obj.name]
+
+def __getattribute__ (self, name):  # WRONG
+    x = self.other
+
+def __getattribute__ (self, name) :  # CORRECT
+    x = object.__getattribute__ (self, 'other') 
+
+def __getattribute__ (self, name) :  # WRONG
+    x = self.__dict__ ['other']
+
+def __setattr__ (self, name, value) :  # CORRECT
+    object.__setattr__(self, name, value)
